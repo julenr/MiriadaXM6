@@ -1,0 +1,10 @@
+body {
+    background: #999;
+}
+
+#page-wrap:after { content: "Wide Layout" }
+
+nav { float:left; width: 15%; height: 200pc; }
+nav span { margin: 0px 100px 0px 0px }
+footer { clear: both; display; block}
+section { clear: both; display: block }
