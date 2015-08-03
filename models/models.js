@@ -22,8 +22,7 @@ var sequelize = new Sequelize(null, null, null,
         dialect: dialect,
         protocol: protocol,
         port: port,
-        host: host,foreman
-
+        host: host,
         storage: storage,
         omitNull: true
     });
