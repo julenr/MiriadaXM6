@@ -16,7 +16,6 @@ var host        = (url[4] || null);
 var storage = process.env.DATABASE_STORAGE;
 
 var Sequelize = require('sequelize');
-
 var sequelize = new Sequelize(null, null, null,
     {
         dialect: dialect,
@@ -37,9 +36,13 @@ sequelize.sync().success(function () {
           Quiz.create({
               pregunta: 'Capital de Italia',
               respuesta: 'Roma'
+          });
+          Quiz.create({
+              pregunta: 'Capital de Portugal',
+              respuesta: 'Lisboa'
           }).success(function () {
-                console.log('Base de datos inicializada');
-              });
+              console.log('Base de datos inicializada');
+          });
       }
    });
 });

@@ -2,26 +2,45 @@
 
 var models = require('../models/models.js');
 
-
-exports.question = function(req, res) {
-    models.Quiz.findAll().success(function(quiz) {
-        res.render('quizes/question',
+exports.index = function(req, res) {
+    models.Quiz.findAll().then(function(quizes) {
+        res.render('quizes/index',
             {
-                pregunta: quiz[0].pregunta,
-                title: 'Quiz'
+                quizes: quizes
+            }
+        );
+    });
+};
+
+exports.search = function(req, res) {
+    searchStr = req.query.search.replace(" ", "%");
+    models.Quiz.findAll({where: ["pregunta like ?", "%" + searchStr + "%"]}).then(function(quizes) {
+        res.render('quizes/index',
+            {
+                quizes: quizes
+            }
+        );
+    });
+};
+
+exports.show = function(req, res) {
+    models.Quiz.find(req.params.quizId).then(function(quiz) {
+        res.render('quizes/show',
+            {
+                quiz: quiz
             }
         );
     });
 };
 
 // GET /quizes/answer
-exports.answers = function(req, res) {
-    models.Quiz.findAll().success(function(quiz) {
-        if (req.query.respuesta === quiz[0].respuesta) {
-            res.render('quizes/answers', {respuesta: 'Correcto', title: 'Quiz'});
+exports.answer = function(req, res) {
+    models.Quiz.find(req.params.quizId).then(function(quiz) {
+        if (req.query.respuesta === quiz.respuesta) {
+            res.render('quizes/answer', {respuesta: 'Correcto', id: req.params.quizId});
         }
         else {
-            res.render('quizes/answers', {respuesta: 'Incorrecto', title: 'Quiz'});
+            res.render('quizes/answer', {respuesta: 'Incorrecto', id: req.params.quizId});
         }
     });
 };
