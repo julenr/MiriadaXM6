@@ -16,7 +16,7 @@ var host        = (url[4] || null);
 var storage = process.env.DATABASE_STORAGE;
 
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize(null, null, null,
+var sequelize = new Sequelize(DB_name, user, pwd,
     {
         dialect: dialect,
         protocol: protocol,
